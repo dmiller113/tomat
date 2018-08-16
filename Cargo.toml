@@ -4,3 +4,4 @@ version = "0.1.0"
 authors = ["Daniel Miller <danm1113@gmail.com>"]
 
 [dependencies]
+structopt = "0.2"

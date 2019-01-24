@@ -5,16 +5,16 @@ use structopt::StructOpt;
 
 #[derive(Debug, StructOpt)]
 #[structopt(name = "tomat", about = "A simple, cli pomodoro timer")]
-enum Timers {
-    /// Timer Type
-    #[structopt(name = "timer")]
-    Timer {
-        #[structopt(parse(from_str))]
-        timer_type: String
-    }
+struct Opt {
+    // is this a break
+    #[structopt(short = "b", long = "break")]
+    /// This pomodoro is a long break
+    is_break: bool,
+
+    pomodoro_name: String,
 }
 
 fn main() {
-    let args = Timers::from_args();
+    let args = Opt::from_args();
     println!("Args; {:?}", args);
 }

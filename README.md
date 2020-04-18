@@ -1,5 +1,7 @@
 # Tomat
 
+This is very much in progress. I would not recommend using this until many versions down the line.
+
 ### Example
 ```
 $> tomat "Write the codes"

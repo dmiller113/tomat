@@ -1,7 +1,6 @@
 use std::time::{ Duration };
 use std::thread::sleep;
 
-#[macro_use]
 extern crate structopt;
 
 use structopt::StructOpt;
@@ -9,30 +8,23 @@ use structopt::StructOpt;
 #[derive(Clone, Debug, StructOpt)]
 #[structopt(name = "tomat", about = "A simple, cli pomodoro timer")]
 struct Opt {
-    // is this a break
-    #[structopt(short = "b", long = "break")]
-    /// This pomodoro is a long break
-    is_break: bool,
-
     #[structopt(short = "d", long = "debug")]
+    /// Show debug information
     is_debug: bool,
 
+    /// Name of pomodoro.
     pomodoro_name: String,
 }
 
 fn main() {
     let args = Opt::from_args();
-    let Opt { pomodoro_name, is_break, is_debug } = args.clone();
+    let Opt { pomodoro_name, is_debug } = args.clone();
 
     if is_debug {
-       println!("Args: {:?}", args); 
+       println!("Args: {:#?}", args); 
     }
 
-    let duration_in_minutes = if is_break {
-        15
-    } else {
-        25
-    };
+    let duration_in_minutes = 25;
 
     println!(
         "Starting pomodoro {}! See you in {} minutes.",

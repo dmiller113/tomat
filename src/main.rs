@@ -1,5 +1,4 @@
 use std::time::{ Duration };
-use std::thread::sleep;
 
 extern crate structopt;
 
@@ -25,6 +24,10 @@ enum Command {
     /// Add to the list of active pomodoro
     #[structopt(name = "add")]
     Add {
+        #[structopt(short = "m", long = "minutes", default_value = "15")]
+        /// Duration of pomodoro, in minutes
+        duration: u32,
+
         #[structopt(name = "task name")]
         /// Name of pomodoro.
         task_name: String,
@@ -43,21 +46,34 @@ fn main() {
     let args = Opt::from_args();
     let Opt {
         is_debug: _,
-        cmd: _,
+        cmd,
         task_name,
     } = args.clone();
 
-    let duration_in_minutes = 25;
+    let subcommand = match (task_name, cmd) {
+        (_, Some(c)) => c,
+        (Some(name), None) => Command::Add {
+            duration: 15,
+            task_name: name,
+        },
+        (None, None) => Command::List {
+            show_ended_tasks: false,
+        },
+    };
 
-    task_name.map(|name| {
-        println!(
-            "Starting pomodoro {}! See you in {} minutes.",
-            name,
-            duration_in_minutes
-        );
+    match subcommand {
+        Command::Add {
+            duration: _dur,
+            task_name: _name,
+        } => {
+            println!("add");
+        },
+        Command::List {
+            show_ended_tasks: _show_all,
+        } => {
+            println!("list");
+        }
+    }
 
-        sleep(Duration::from_secs(duration_in_minutes * 60));
-        println!("ring ring ring! {} is done!", name);
-        name
-    });
+    println!("We ran.");
 }

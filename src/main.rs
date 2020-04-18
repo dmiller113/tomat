@@ -42,8 +42,15 @@ enum Command {
     }
 }
 
+struct Config {
+    duration: u32,
+}
+
 fn main() {
     let args = Opt::from_args();
+    let config = Config {
+        duration: 15,
+    };
     let Opt {
         is_debug: _,
         cmd,
@@ -53,7 +60,7 @@ fn main() {
     let subcommand = match (task_name, cmd) {
         (_, Some(c)) => c,
         (Some(name), None) => Command::Add {
-            duration: 15,
+            duration: config.duration,
             task_name: name,
         },
         (None, None) => Command::List {

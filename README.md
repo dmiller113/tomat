@@ -31,4 +31,4 @@ SUBCOMMANDS:
     list    Show list of active pomodoro
 ```
 
-When providing a task name, `add` is the default command. Without a task name, `help` is the default command.
+When providing a task name, `add` is the default command. Without a task name, `list` is the default command.

@@ -1,8 +1,10 @@
-use std::time::{ Duration };
-
 extern crate structopt;
 
+mod config;
+
+use std::time::{ Duration };
 use structopt::StructOpt;
+use crate::config::Config;
 
 #[derive(Clone, StructOpt)]
 #[structopt(name = "tomat", about = "A simple, cli pomodoro timer")]
@@ -40,10 +42,6 @@ enum Command {
         /// Show cancelled and finished pomodoros
         show_ended_tasks: bool,
     }
-}
-
-struct Config {
-    duration: u32,
 }
 
 fn main() {

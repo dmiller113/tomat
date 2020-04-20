@@ -1,48 +1,12 @@
 extern crate structopt;
 
 mod config;
+mod cli;
 
-use std::time::{ Duration };
+// use std::time::{ Duration };
 use structopt::StructOpt;
 use crate::config::Config;
-
-#[derive(Clone, StructOpt)]
-#[structopt(name = "tomat", about = "A simple, cli pomodoro timer")]
-struct Opt {
-    #[structopt(short = "d", long = "debug")]
-    /// Show debug information
-    is_debug: bool,
-
-    #[structopt(subcommand)]
-    cmd: Option<Command>,
-
-    #[structopt(name = "task name")]
-    /// Name of pomodoro.
-    task_name: Option<String>,
-}
-
-#[derive(Clone, StructOpt)]
-enum Command {
-    /// Add to the list of active pomodoro
-    #[structopt(name = "add")]
-    Add {
-        #[structopt(short = "m", long = "minutes", default_value = "15")]
-        /// Duration of pomodoro, in minutes
-        duration: u32,
-
-        #[structopt(name = "task name")]
-        /// Name of pomodoro.
-        task_name: String,
-    },
-
-    /// Show list of active pomodoro
-    #[structopt(name = "list")]
-    List {
-        #[structopt(short = "a", long = "all")]
-        /// Show cancelled and finished pomodoros
-        show_ended_tasks: bool,
-    }
-}
+use crate::cli::{Opt, Command};
 
 fn main() {
     let args = Opt::from_args();

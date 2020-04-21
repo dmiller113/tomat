@@ -1,18 +1,18 @@
 extern crate structopt;
 
+mod add;
 mod config;
 mod cli;
 
 // use std::time::{ Duration };
 use structopt::StructOpt;
-use crate::config::Config;
+use crate::add::{add_pomodoro};
+use crate::config::{get_configuration};
 use crate::cli::{Opt, Command};
 
 fn main() {
     let args = Opt::from_args();
-    let config = Config {
-        duration: 15,
-    };
+    let config = get_configuration();
     let Opt {
         is_debug: _,
         cmd,
@@ -32,10 +32,10 @@ fn main() {
 
     match subcommand {
         Command::Add {
-            duration: _dur,
-            task_name: _name,
+            duration: dur,
+            task_name: name,
         } => {
-            println!("add");
+            add_pomodoro(dur, name);
         },
         Command::List {
             show_ended_tasks: _show_all,
@@ -43,6 +43,4 @@ fn main() {
             println!("list");
         }
     }
-
-    println!("We ran.");
 }

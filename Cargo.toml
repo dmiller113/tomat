@@ -5,3 +5,4 @@ authors = ["Daniel Miller <danm1113@gmail.com>"]
 
 [dependencies]
 structopt = "0.2"
+cursive = "0.14"

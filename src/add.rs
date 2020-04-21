@@ -1,6 +1,6 @@
-use crate::view::{Console};
+use crate::view::Console;
 
-pub fn add_pomodoro(duration: u32, name: String) -> () {
+pub fn add_pomodoro(duration: u32, name: String) {
     let mut console = Console::setup();
     console.run();
 

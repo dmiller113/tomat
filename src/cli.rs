@@ -35,6 +35,5 @@ pub enum Command {
         #[structopt(short = "a", long = "all")]
         /// Show cancelled and finished pomodoros
         show_ended_tasks: bool,
-    }
+    },
 }
-

@@ -3,8 +3,5 @@ pub struct Config {
 }
 
 pub fn get_configuration() -> Config {
-    let config = Config {
-        duration: 15,
-    };
-    config
+    Config { duration: 15 }
 }

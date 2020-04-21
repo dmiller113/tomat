@@ -7,13 +7,12 @@ pub struct Console {
 impl Console {
     pub fn setup() -> Console {
         Console {
-            console: Cursive::default()
+            console: Cursive::default(),
         }
     }
 
     pub fn run(&mut self) -> &Console {
         self.console.run();
-        return self;
+        self
     }
 }
-

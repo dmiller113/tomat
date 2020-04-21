@@ -2,26 +2,22 @@ extern crate cursive;
 extern crate structopt;
 
 mod add;
-mod config;
 mod cli;
+mod config;
 mod list;
 mod view;
 
 // use std::time::{ Duration };
+use crate::add::add_pomodoro;
+use crate::cli::{Command, Opt};
+use crate::config::get_configuration;
+use crate::list::list_pomodoros;
 use structopt::StructOpt;
-use crate::add::{add_pomodoro};
-use crate::config::{get_configuration};
-use crate::cli::{Opt, Command};
-use crate::list::{list_pomodoros};
 
 fn main() {
     let args = Opt::from_args();
     let config = get_configuration();
-    let Opt {
-        is_debug: _,
-        cmd,
-        task_name,
-    } = args.clone();
+    let Opt { cmd, task_name, .. } = args;
 
     let subcommand = match (task_name, cmd) {
         (_, Some(c)) => c,
@@ -40,7 +36,7 @@ fn main() {
             task_name: name,
         } => {
             add_pomodoro(dur, name);
-        },
+        }
         Command::List {
             show_ended_tasks: show_all,
         } => {

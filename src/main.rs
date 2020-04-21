@@ -3,12 +3,14 @@ extern crate structopt;
 mod add;
 mod config;
 mod cli;
+mod list;
 
 // use std::time::{ Duration };
 use structopt::StructOpt;
 use crate::add::{add_pomodoro};
 use crate::config::{get_configuration};
 use crate::cli::{Opt, Command};
+use crate::list::{list_pomodoros};
 
 fn main() {
     let args = Opt::from_args();
@@ -38,9 +40,9 @@ fn main() {
             add_pomodoro(dur, name);
         },
         Command::List {
-            show_ended_tasks: _show_all,
+            show_ended_tasks: show_all,
         } => {
-            println!("list");
+            list_pomodoros(show_all);
         }
     }
 }

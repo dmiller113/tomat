@@ -13,7 +13,6 @@ use crate::add::{add_pomodoro};
 use crate::config::{get_configuration};
 use crate::cli::{Opt, Command};
 use crate::list::{list_pomodoros};
-use crate::view::{setup};
 
 fn main() {
     let args = Opt::from_args();
@@ -34,8 +33,6 @@ fn main() {
             show_ended_tasks: false,
         },
     };
-
-    let mut console = setup();
 
     match subcommand {
         Command::Add {

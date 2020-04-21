@@ -1,7 +1,19 @@
 use cursive::Cursive;
 
-pub fn setup() -> Cursive {
-    let mut console = Cursive::default();
-    console.run();
-    console
+pub struct Console {
+    console: Cursive,
 }
+
+impl Console {
+    pub fn setup() -> Console {
+        Console {
+            console: Cursive::default()
+        }
+    }
+
+    pub fn run(&mut self) -> &Console {
+        self.console.run();
+        return self;
+    }
+}
+

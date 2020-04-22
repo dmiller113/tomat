@@ -7,22 +7,12 @@ borders = "simple"  # Alternatives are "none" and "outset"
 # Here we define the color palette.
 [colors]
 background = "black"
-# If the value is an array, the first valid color will be used.
-# If the terminal doesn't support custom color,
-# non-base colors will be skipped.
 shadow     = "black"
 view       = "black"
-
-# Array and simple values have the same effect.
 primary   = "white"
 secondary = "red"
 tertiary  = "blue"
-
-# Hex values can use lower or uppercase.
-# (base color MUST be lowercase)
 title_primary   = "red"
 title_secondary = "magenta"
-
-# Lower precision values can use only 3 digits.
 highlight          = "yellow"
 highlight_inactive = "blue"

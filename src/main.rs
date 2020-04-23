@@ -16,31 +16,32 @@ use structopt::StructOpt;
 
 fn main() {
     let args = Opt::from_args();
-    let config = get_configuration();
-    let Opt { cmd, task_name, .. } = args;
+    get_configuration().map(|config| {
+        let Opt { cmd, task_name, .. } = args;
 
-    let subcommand = match (task_name, cmd) {
-        (_, Some(c)) => c,
-        (Some(name), None) => Command::Add {
-            duration: config.duration,
-            task_name: name,
-        },
-        (None, None) => Command::List {
-            show_ended_tasks: false,
-        },
-    };
+        let subcommand = match (task_name, cmd) {
+            (_, Some(c)) => c,
+            (Some(name), None) => Command::Add {
+                duration: config.duration,
+                task_name: name,
+            },
+            (None, None) => Command::List {
+                show_ended_tasks: false,
+            },
+        };
 
-    match subcommand {
-        Command::Add {
-            duration: dur,
-            task_name: name,
-        } => {
-            add_pomodoro(dur, name);
+        match subcommand {
+            Command::Add {
+                duration: dur,
+                task_name: name,
+            } => {
+                add_pomodoro(dur, name);
+            }
+            Command::List {
+                show_ended_tasks: show_all,
+            } => {
+                list_pomodoros(show_all);
+            }
         }
-        Command::List {
-            show_ended_tasks: show_all,
-        } => {
-            list_pomodoros(show_all);
-        }
-    }
+    }).map_err(|err| println!("{:?}", err));
 }

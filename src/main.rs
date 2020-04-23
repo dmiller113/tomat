@@ -35,7 +35,7 @@ fn main() {
                 duration: dur,
                 task_name: name,
             } => {
-                add_pomodoro(dur, name);
+                add_pomodoro(dur, name, config);
             }
             Command::List {
                 show_ended_tasks: show_all,

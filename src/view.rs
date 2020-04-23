@@ -11,9 +11,7 @@ impl Console {
         let mut console = Cursive::default();
         console.set_theme(theme);
 
-        Console {
-            console: console,
-        }
+        Console { console }
     }
 
     pub fn run(&mut self) -> &Console {

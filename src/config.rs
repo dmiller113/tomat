@@ -9,11 +9,14 @@ pub struct Config {
 
 pub fn get_configuration() -> Result<Config, ThemeError> {
     config_dir()
-        .ok_or(ThemeError::Io(Error::new(
+        .ok_or_else(|| ThemeError::Io(Error::new(
             ErrorKind::NotFound,
-            "No config directory"
+            "No config directory",
         )))
         .map(|path| path.as_path().join("tomat/theme.toml"))
-        .and_then(|path| load_theme_file(path))
-        .map(|theme| Config { duration: 15, theme:  theme})
+        .and_then(load_theme_file)
+        .map(|theme| Config {
+            duration: 15,
+            theme,
+        })
 }

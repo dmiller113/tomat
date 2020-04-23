@@ -5,12 +5,6 @@ This is very much in progress. I would not recommend using this until many versi
 ### Example
 ```
 $> tomat "Write the codes"
-
-Starting pomodoro Write the codes! See you in 25 minutes.
-
-# 25 minutes later
-
-ring ring ring! Write the codes is done!
 ```
 
 ### Usage
@@ -29,6 +23,7 @@ SUBCOMMANDS:
     add     Add to the list of active pomodoro
     help    Prints this message or the help of the given subcommand(s)
     list    Show list of active pomodoro
+		start   Start a pomodoro
 ```
 
-When providing a task name, `add` is the default command. Without a task name, `list` is the default command.
+When providing a task name, `start` is the default command. Without a task name, `list` is the default command.

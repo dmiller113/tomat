@@ -36,4 +36,16 @@ pub enum Command {
         /// Show cancelled and finished pomodoros
         show_ended_tasks: bool,
     },
+
+    /// Start a pomodoro
+    #[structopt(name = "start")]
+    Start {
+        #[structopt(short = "m", long = "minutes", default_value = "15", name = "duration")]
+        /// Duration of pomodoro, in minutes
+        minutes: u32,
+
+        #[structopt(name = "task name")]
+        /// Name of pomodoro.
+        task_name: String,
+    }
 }

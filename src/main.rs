@@ -25,7 +25,7 @@ fn main() {
             let subcommand = match (task_name, cmd) {
                 (_, Some(c)) => c,
                 (Some(name), None) => Command::Start {
-                    duration: config.duration,
+                    minutes: config.duration,
                     task_name: name,
                 },
                 (None, None) => Command::List {

@@ -11,3 +11,7 @@ structopt = "0.2"
 [dependencies.cursive]
 version = "0.14"
 features = ["toml"]
+
+[dependencies.uuid]
+version = "0.8"
+features = ["serde", "v4"]

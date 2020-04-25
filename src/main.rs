@@ -6,6 +6,7 @@ mod cli;
 mod config;
 mod list;
 mod start;
+mod types;
 mod view;
 
 // use std::time::{ Duration };

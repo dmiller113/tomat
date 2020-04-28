@@ -8,14 +8,17 @@ mod list;
 mod start;
 mod types;
 mod view;
+mod views;
 
 // use std::time::{ Duration };
 use crate::add::add_pomodoro;
 use crate::cli::{Command, Opt};
 use crate::config::get_configuration;
 use crate::list::list_pomodoros;
+use crate::types::Pomodoro;
 use crate::start::start_pomodoro;
 use structopt::StructOpt;
+use std::time::Duration;
 
 fn main() {
     let args = Opt::from_args();
@@ -50,7 +53,12 @@ fn main() {
                     minutes,
                     task_name: name,
                 } => {
-                    start_pomodoro(minutes, name, config);
+                    let task = Pomodoro::new(
+                        name,
+                        Duration::from_secs((minutes * 60).into()),
+                        [].to_vec(),
+                    );
+                    start_pomodoro(task, config);
                 }
             }
         })

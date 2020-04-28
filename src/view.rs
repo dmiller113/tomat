@@ -1,20 +1,18 @@
 use crate::config::Config;
 use cursive::Cursive;
-use cursive::views::Dialog;
+use cursive::view::View;
 
 pub struct Console {
     console: Cursive,
 }
 
 impl Console {
-    pub fn add_alert(mut self, inner_text: String) -> Console {
-        self.console.add_layer(Dialog::text(inner_text)
-            .title("tomat")
-            .button("Ok", |s| s.quit()));
+    pub fn attach<V: View>(mut self, view: V) -> Self {
+        self.console.add_layer(view);
         self
     }
 
-    pub fn setup(config: Config) -> Console {
+    pub fn setup(config: Config) -> Self {
         let Config { theme, .. } = config;
         let mut console = Cursive::default();
         console.set_theme(theme);
@@ -22,7 +20,7 @@ impl Console {
         Console { console }
     }
 
-    pub fn run(mut self) -> Console {
+    pub fn run(mut self) -> Self {
         self.console.run();
         self
     }
